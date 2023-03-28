@@ -1,0 +1,11 @@
+.env
+.github
+.git
+.idea
+cmd
+
+.gcloudignore
+.gitignore
+dictionary.json
+gha-creds-*.json
+README.md

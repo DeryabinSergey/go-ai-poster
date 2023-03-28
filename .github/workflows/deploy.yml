@@ -1,0 +1,30 @@
+on:
+  push:
+    branches:
+      - "main"
+
+jobs:
+  job_id:
+    name: Deploy to Cloud Run
+    runs-on: 'ubuntu-latest'
+    permissions:
+      contents: 'read'
+      id-token: 'write'
+
+    steps:
+      - uses: 'actions/checkout@v3'
+      - id: 'auth'
+        name: 'Authenticate to Google Cloud'
+        uses: 'google-github-actions/auth@v1'
+        with:
+          workload_identity_provider: 'projects/379297460944/locations/global/workloadIdentityPools/global-pool/providers/github'
+          service_account: 'deploy@deriabin-cloud-example.iam.gserviceaccount.com'
+          token_format: 'access_token'
+      - id: 'setup'
+        name: 'Set up Cloud SDK'
+        uses: 'google-github-actions/setup-gcloud@v1'
+        with:
+          version: '>= 363.0.0'
+      - id: 'deploy'
+        name: 'Use to deploy a cloud function gen 2'
+        run: 'gcloud functions deploy --gen2 --runtime=go120 --region=europe-west3 --memory=128Mi --service-account=deriabin-cloud-example@appspot.gserviceaccount.com --run-service-account=deriabin-cloud-example@appspot.gserviceaccount.com --trigger-topic="go-ai-poster" --trigger-location=europe-west3 --trigger-service-account=deriabin-cloud-example@appspot.gserviceaccount.com --entry-point=EventHandler --set-secrets=OPENAI_TOKEN=projects/379297460944/secrets/ai-token/versions/1,TELEGRAM_BOT_TOKEN=projects/379297460944/secrets/ai-poster-bot/versions/1 --set-env-vars="TELEGRAM_CHANNEL_ID=-1001563411901,DICTIONARY_FILE=ai-poster/dictionary.json,DIALOGUE_FILE=ai-poster/dialogue.json,BUCKET_NAME=deriabin-cloud-bucket" GoAiPoster'

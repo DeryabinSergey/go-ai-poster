@@ -1,0 +1,73 @@
+{
+  "list": [
+    {
+      "key": "joke",
+      "themes": [
+        "Joke about Developers",
+        "Joke about Programmers",
+        "Joke about Unity Developers",
+        "Joke about Assembler Developers",
+        "Joke about C++ Developers",
+        "Joke about C# Developers",
+        "Joke about C Developers",
+        "Joke about Java Developers",
+        "Joke about JavaScript Developers",
+        "Joke about PHP Developers",
+        "Joke about Python Developers",
+        "Joke about Ruby Developers",
+        "Joke about Swift Developers",
+        "Joke about Go Developers",
+        "Joke about Rust Developers",
+        "Joke about Kotlin Developers"
+      ]
+    },
+    {
+      "key": "fact",
+      "themes": [
+        "Interesting fact about qBasic",
+        "Interesting fact about C",
+        "Interesting fact about C++",
+        "Interesting fact about C#",
+        "Interesting fact about Java",
+        "Interesting fact about JavaScript",
+        "Interesting fact about PHP",
+        "Interesting fact about Python",
+        "Interesting fact about Ruby",
+        "Interesting fact about Swift",
+        "Interesting fact about Go",
+        "Interesting fact about Rust",
+        "Interesting fact about Kotlin",
+        "Interesting fact about computers",
+        "Interesting fact about programming",
+        "Interesting fact about developers",
+        "Interesting fact about UX/UI",
+        "Interesting fact about IT",
+        "Interesting fact about IT industry"
+      ]
+    },
+    {
+      "key": "post",
+      "themes": [
+        "Post about qBasic",
+        "Post about C",
+        "Post about C++",
+        "Post about C#",
+        "Post about Java",
+        "Post about JavaScript",
+        "Post about PHP",
+        "Post about Python",
+        "Post about Ruby",
+        "Post about Swift",
+        "Post about Go",
+        "Post about Rust",
+        "Post about Kotlin",
+        "Post about computers",
+        "Post about programming",
+        "Post about developers",
+        "Post about UX/UI",
+        "Post about IT",
+        "Post about IT industry"
+      ]
+    }
+  ]
+}
