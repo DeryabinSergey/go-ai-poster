@@ -10,15 +10,16 @@ type Storage struct {
 	bucket *storage.BucketHandle
 }
 
-func NewStorage(ctx context.Context, bucket string) (storageClient *Storage, err error) {
+func NewStorage(ctx context.Context, bucket string) (*Storage, error) {
+	storageClient := &Storage{}
 	client, err := storage.NewClient(ctx)
 	if err != nil {
-		return storageClient, fmt.Errorf("storage.NewClient: %w", err)
+		return nil, fmt.Errorf("storage.NewClient: %w", err)
 	}
 
 	storageClient.bucket = client.Bucket(bucket)
 
-	return
+	return storageClient, nil
 }
 
 func (s *Storage) GetReader(ctx context.Context, object string) (reader *storage.Reader, err error) {
