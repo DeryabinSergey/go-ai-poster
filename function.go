@@ -11,6 +11,7 @@ import (
 	"log"
 	"net/http"
 	"net/url"
+	"strings"
 )
 
 func init() {
@@ -121,7 +122,7 @@ func EventHandler(ctx context.Context, e event.Event) error {
 			return fmt.Errorf("ChatCompletion error: %w", err)
 		}
 
-		content := resp.Choices[0].Message.Content
+		content := cleanString(resp.Choices[0].Message.Content)
 		dialog.Messages = append(dialog.Messages, openai.ChatCompletionMessage{
 			Role:    openai.ChatMessageRoleAssistant,
 			Content: content,
@@ -149,6 +150,30 @@ func EventHandler(ctx context.Context, e event.Event) error {
 	}
 
 	return nil
+}
+
+// cleanString removes the bot's phrases from the response, if exist
+func cleanString(str string) string {
+	// a list of bot phrases that are known at the moment
+	listBotPhrases := []string{
+		"sure,",
+		"here's",
+		"here is",
+	}
+
+	list := strings.SplitN(str, "\n", 2)
+	if len(list) < 2 {
+		return str
+	}
+
+	firstLine := strings.ToLower(strings.TrimSpace(list[0]))
+	for _, botPhrase := range listBotPhrases {
+		if strings.HasPrefix(firstLine, botPhrase) {
+			return strings.TrimSpace(list[1])
+		}
+	}
+
+	return str
 }
 
 // postMessage sends a message to the telegram channel.
